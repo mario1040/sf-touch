@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Medical Luxury Palette */
+    --background: 0 0% 100%;
+    --foreground: 215 28% 17%;
+    
+    --card: 210 20% 98%;
+    --card-foreground: 215 28% 17%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 28% 17%;
+    
+    /* Soft Gold - Luxury Accent */
+    --primary: 43 69% 53%;
+    --primary-foreground: 0 0% 100%;
+    
+    /* Dark Slate - Trust & Professionalism */
+    --secondary: 215 28% 17%;
+    --secondary-foreground: 0 0% 100%;
+    
+    /* Soft Gray - Clean Medical Feel */
+    --muted: 210 40% 98%;
+    --muted-foreground: 215 16% 47%;
+    
+    /* Muted Teal - Medical Trust */
+    --accent: 175 35% 45%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 43 69% 53%;
+    
+    --radius: 0.75rem;
+    
+    /* Custom Variables */
+    --gold: 43 69% 53%;
+    --gold-light: 43 69% 63%;
+    --slate-dark: 215 28% 17%;
+    --slate-medium: 215 20% 35%;
+    --gray-soft: 210 40% 98%;
+    --teal-medical: 175 35% 45%;
+    
+    /* Gradients */
+    --gradient-gold: linear-gradient(135deg, hsl(43 69% 53%) 0%, hsl(43 69% 63%) 100%);
+    --gradient-dark: linear-gradient(135deg, hsl(215 28% 17%) 0%, hsl(215 20% 25%) 100%);
+    --gradient-hero: linear-gradient(180deg, rgba(30, 41, 59, 0.7) 0%, rgba(30, 41, 59, 0.4) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px rgba(30, 41, 59, 0.1);
+    --shadow-gold: 0 4px 20px -4px rgba(212, 175, 55, 0.3);
+    --shadow-card: 0 8px 30px -12px rgba(30, 41, 59, 0.15);
+    
+    /* Sidebar */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 215 28% 10%;
+    --foreground: 210 40% 98%;
+    
+    --card: 215 28% 14%;
+    --card-foreground: 210 40% 98%;
+    
+    --popover: 215 28% 12%;
+    --popover-foreground: 210 40% 98%;
+    
+    --primary: 43 69% 53%;
+    --primary-foreground: 215 28% 10%;
+    
+    --secondary: 215 20% 25%;
+    --secondary-foreground: 210 40% 98%;
+    
+    --muted: 215 20% 18%;
+    --muted-foreground: 215 16% 60%;
+    
+    --accent: 175 35% 45%;
+    --accent-foreground: 0 0% 100%;
+    
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 210 40% 98%;
+    
+    --border: 215 20% 20%;
+    --input: 215 20% 20%;
+    --ring: 43 69% 53%;
+    
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  /* Arabic RTL Support */
+  html[dir="rtl"] body {
+    font-family: 'Cairo', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Button Variants */
+  .btn-gold {
+    @apply bg-primary text-primary-foreground hover:opacity-90 transition-all duration-300;
+    box-shadow: var(--shadow-gold);
+  }
+  
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px -4px rgba(212, 175, 55, 0.4);
+  }
+  
+  .btn-dark {
+    @apply bg-secondary text-secondary-foreground hover:opacity-90 transition-all duration-300;
+  }
+  
+  .btn-outline-gold {
+    @apply border-2 border-primary text-primary bg-transparent hover:bg-primary hover:text-primary-foreground transition-all duration-300;
+  }
+  
+  /* Card Styles */
+  .card-elevated {
+    @apply bg-card rounded-xl p-6 transition-all duration-300;
+    box-shadow: var(--shadow-card);
+  }
+  
+  .card-elevated:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -12px rgba(30, 41, 59, 0.2);
+  }
+  
+  /* Section Styles */
+  .section-padding {
+    @apply py-16 md:py-24 px-4 md:px-8;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+  
+  /* Gold Accent Underline */
+  .gold-underline {
+    @apply relative inline-block;
+  }
+  
+  .gold-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-full h-1 bg-primary rounded-full;
+    transform: scaleX(0.3);
+    transform-origin: left;
+  }
+  
+  /* Text Gradient */
+  .text-gradient-gold {
+    background: linear-gradient(135deg, hsl(43 69% 53%) 0%, hsl(43 69% 63%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Marquee Animation */
+  .marquee {
+    @apply flex gap-8;
+    animation: marquee 30s linear infinite;
+  }
+  
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  
+  /* Hero Overlay */
+  .hero-overlay {
+    background: var(--gradient-hero);
+  }
+  
+  /* Service Card Link Hover */
+  .service-card {
+    @apply relative overflow-hidden;
+  }
+  
+  .service-card::before {
+    content: '';
+    @apply absolute inset-0 bg-primary opacity-0 transition-opacity duration-300;
+  }
+  
+  .service-card:hover::before {
+    @apply opacity-5;
+  }
+}
+
+@layer utilities {
+  /* RTL Specific Utilities */
+  [dir="rtl"] .rtl-flip {
+    transform: scaleX(-1);
+  }
+  
+  /* Smooth Transitions */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+  
+  /* Focus Ring Gold */
+  .focus-gold:focus {
+    @apply outline-none ring-2 ring-primary ring-offset-2;
+  }
+}

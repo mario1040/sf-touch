@@ -1,0 +1,48 @@
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LanguageProvider } from "@/context/LanguageContext";
+import Layout from "@/components/Layout";
+import Index from "./pages/Index";
+import AboutUs from "./pages/AboutUs";
+import Services from "./pages/Services";
+import Doctors from "./pages/Doctors";
+import Offers from "./pages/Offers";
+import ContactUs from "./pages/ContactUs";
+import DermatologyLaser from "./pages/DermatologyLaser";
+import NutritionContouring from "./pages/NutritionContouring";
+import HairRestoration from "./pages/HairRestoration";
+import NotFound from "./pages/NotFound";
+
+const queryClient = new QueryClient();
+
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <LanguageProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/services" element={<Services />} />
+              <Route path="/services/dermatology-laser" element={<DermatologyLaser />} />
+              <Route path="/services/nutrition-contouring" element={<NutritionContouring />} />
+              <Route path="/services/hair-restoration" element={<HairRestoration />} />
+              <Route path="/doctors" element={<Doctors />} />
+              <Route path="/offers" element={<Offers />} />
+              <Route path="/contact-us" element={<ContactUs />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Layout>
+        </BrowserRouter>
+      </TooltipProvider>
+    </LanguageProvider>
+  </QueryClientProvider>
+);
+
+export default App;
