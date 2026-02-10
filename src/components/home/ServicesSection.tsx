@@ -1,94 +1,176 @@
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Sparkles, Apple, Scissors } from 'lucide-react';
+import { motion, useScroll, useTransform, Variants } from 'framer-motion';
+import { ArrowRight, Sparkles, Apple, Scissors, Activity, ScanFace, Zap } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
+import { cn } from '@/lib/utils';
 
 const ServicesSection = () => {
   const { t, isRTL } = useLanguage();
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  // تأثير Parallax بسيط للخلفية
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
   const services = [
     {
-      icon: Sparkles,
-      title: t.services.dermatology.title,
+      id: '01',
+      title: t.services.dermatology.title, // "الجلدية والليزر"
       description: t.services.dermatology.description,
+      icon: Sparkles,
+      image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop', // صورة ليزر/جلدية
       href: '/services/dermatology-laser',
-      gradient: 'from-primary/20 to-primary/5',
+      color: 'text-purple-400',
+      bgGradient: 'from-purple-500/20 to-blue-500/20'
     },
     {
-      icon: Apple,
-      title: t.services.nutrition.title,
+      id: '02',
+      title: t.services.nutrition.title, // "التغذية العلاجية"
       description: t.services.nutrition.description,
+      icon: Apple,
+      image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=2053&auto=format&fit=crop', // صورة طعام صحي
       href: '/services/nutrition-contouring',
-      gradient: 'from-accent/20 to-accent/5',
+      color: 'text-green-400',
+      bgGradient: 'from-green-500/20 to-emerald-500/20'
     },
     {
-      icon: Scissors,
-      title: t.services.hair.title,
+      id: '03',
+      title: t.services.hair.title, // "علاج الشعر"
       description: t.services.hair.description,
+      icon: Scissors,
+      image: 'https://images.unsplash.com/photo-1595476103518-3c18c81f1a0a?q=80&w=2070&auto=format&fit=crop', // صورة شعر صحي
       href: '/services/hair-restoration',
-      gradient: 'from-secondary/20 to-secondary/5',
+      color: 'text-yellow-400',
+      bgGradient: 'from-yellow-500/20 to-orange-500/20'
     },
   ];
 
+  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15 }
+      transition: { staggerChildren: 0.2 }
     }
   };
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { duration: 0.8, ease: "easeOut" } 
+    }
   };
 
   return (
-    <section id="services" className="section-padding bg-muted">
-      <div className="container-custom">
-        {/* Header */}
+    <section 
+      id="services" 
+      ref={sectionRef} 
+      className="relative py-24 bg-white overflow-hidden"
+    >
+       {/* ================= BACKGROUND DECORATION ================= */}
+       {/* نقش خفيف جداً في الخلفية */}
+       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-60 pointer-events-none" />
+       
+       {/* دائرة لونية متحركة */}
+       <motion.div 
+         style={{ y: yBg }}
+         className="absolute top-0 right-0 w-[600px] h-[600px] bg-slate-100 rounded-full blur-[100px] -z-10 opacity-70"
+       />
+
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
+        
+        {/* ================= HEADER ================= */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          transition={{ duration: 0.7 }}
+          className="text-center mb-20 max-w-3xl mx-auto"
         >
-          <span className="text-primary font-medium text-sm uppercase tracking-wider">
-            {t.services.subtitle}
-          </span>
-          <h2 className="text-3xl md:text-4xl font-bold text-secondary mt-2">
-            {t.services.title}
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <span className="h-px w-8 bg-yellow-500"></span>
+            <span className="text-yellow-600 font-bold text-xs uppercase tracking-widest">
+              {t.services.subtitle || (isRTL ? 'خدماتنا المتكاملة' : 'Our Expertise')}
+            </span>
+            <span className="h-px w-8 bg-yellow-500"></span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 font-cairo">
+            {isRTL ? 'رعاية طبية تفوق' : 'Medical Care Beyond'} <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 to-yellow-500">
+              {isRTL ? 'التوقعات' : 'Expectations'}
+            </span>
           </h2>
+          <p className="text-slate-500 text-lg leading-relaxed">
+            {isRTL 
+              ? 'نقدم لكِ مجموعة شاملة من الخدمات التجميلية والعلاجية المصممة خصيصاً لإبراز جمالك الطبيعي.'
+              : 'We provide a comprehensive range of aesthetic and therapeutic services designed specifically to highlight your natural beauty.'}
+          </p>
         </motion.div>
 
-        {/* Services Grid */}
+        {/* ================= SERVICES CARDS ================= */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
         >
           {services.map((service) => (
-            <motion.div key={service.href} variants={itemVariants}>
-              <Link
-                to={service.href}
-                className="card-elevated group block h-full bg-background"
-              >
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <service.icon className="w-8 h-8 text-secondary" />
+            <motion.div key={service.id} variants={cardVariants} className="h-full">
+              <Link to={service.href} className="group relative block h-[500px] w-full overflow-hidden rounded-[2rem] shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                
+                {/* 1. Background Image */}
+                <div className="absolute inset-0 h-full w-full">
+                  <img 
+                    src={service.image} 
+                    alt={service.title} 
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  {/* Overlay Gradient (Dark at bottom for text) */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#05151F] via-[#05151F]/40 to-transparent opacity-80 group-hover:opacity-70 transition-opacity duration-500" />
                 </div>
-                <h3 className="text-xl font-semibold text-secondary mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                  {service.description}
-                </p>
-                <span className="inline-flex items-center text-primary font-medium text-sm group-hover:gap-3 transition-all">
-                  {t.services.learnMore}
-                  <ArrowRight className={`w-4 h-4 ${isRTL ? 'me-2 rtl-flip' : 'ms-2'}`} />
-                </span>
+
+                {/* 2. Top Content (Icon & Number) */}
+                <div className="absolute top-0 left-0 right-0 p-8 flex justify-between items-start z-20">
+                   <div className={`p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-white shadow-lg group-hover:bg-yellow-500 group-hover:text-black transition-colors duration-300`}>
+                      <service.icon className="w-8 h-8" />
+                   </div>
+                   <span className="text-6xl font-bold text-white/10 font-mono tracking-tighter select-none">
+                      {service.id}
+                   </span>
+                </div>
+
+                {/* 3. Bottom Content (Glass Card) */}
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+                  <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 overflow-hidden relative group-hover:bg-white/20 transition-colors duration-300">
+                    
+                    {/* Glowing effect inside card */}
+                    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.bgGradient} rounded-full blur-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+
+                    <h3 className="text-2xl font-bold text-white mb-3 font-cairo">
+                      {service.title}
+                    </h3>
+                    
+                    <p className="text-slate-300 text-sm leading-relaxed mb-6 line-clamp-2 group-hover:text-white transition-colors">
+                      {service.description}
+                    </p>
+
+                    <div className="flex items-center gap-2 text-yellow-400 font-bold text-sm tracking-wide uppercase">
+                      <span>{t.services.learnMore || (isRTL ? 'اعرفي المزيد' : 'Learn More')}</span>
+                      <div className={`w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center transition-all duration-300 group-hover:bg-yellow-500 group-hover:text-black group-hover:translate-x-2 ${isRTL ? 'group-hover:-translate-x-2' : ''}`}>
+                         <ArrowRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
               </Link>
             </motion.div>
           ))}
