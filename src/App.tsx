@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,6 +20,18 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// 1. إنشاء مكون ScrollToTop
+// هذا المكون يراقب تغيير الرابط ويرفع الصفحة للأعلى
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <LanguageProvider>
@@ -25,6 +39,9 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          {/* 2. وضع المكون هنا ليعمل مع كل الصفحات */}
+          <ScrollToTop />
+          
           <Layout>
             <Routes>
               <Route path="/" element={<Index />} />
