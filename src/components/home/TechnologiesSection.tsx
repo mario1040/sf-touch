@@ -1,7 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
-import { Sparkles, Zap, Activity, ScanFace, Waves } from 'lucide-react';
+// قمت باستيراد أيقونات إضافية لتناسب تنوع الأجهزة
+import { Sparkles, Zap, Activity, ScanFace, Waves, Snowflake, Droplets, Syringe, Eraser, Microscope } from 'lucide-react';
 
 interface Technology {
   id: number;
@@ -16,57 +17,128 @@ const TechnologiesSection = () => {
   const { isRTL } = useLanguage();
 
   const technologies: Technology[] = [
+    // --- أجهزة الليزر ---
     {
       id: 1,
-      name: 'Deka Again',
-      description: 'Fastest Laser Hair Removal',
-      arabicDescription: 'الأسرع والأقوى لإزالة الشعر',
-      image: '/images/dev1.png', // تأكد من مسار صورتك
+      name: 'Deka Again 2024',
+      description: 'Fastest Full Body Laser Hair Removal',
+      arabicDescription: 'الأسرع والأقوى لإزالة الشعر (جلسة كاملة في 30 دقيقة)',
+      image: '/images/dev1.png',
       icon: Zap,
     },
     {
       id: 2,
       name: 'Motus Pro',
       description: 'Pain-free Alexandrite Laser',
-      arabicDescription: 'ليزر ألكسندريت بدون ألم',
+      arabicDescription: 'ليزر ألكسندريت بدون ألم لجميع أنواع البشرة',
       image: '/images/dev2.png',
       icon: Sparkles,
     },
+
+    // --- أجهزة الجلدية والتجميل ---
     {
       id: 3,
-      name: 'Smart Lipo',
-      description: 'Laser Body Sculpting',
-      arabicDescription: 'نحت القوام وشفط الدهون',
+      name: 'Fractional Laser',
+      description: 'Skin Resurfacing & Scar Removal',
+      arabicDescription: 'علاج آثار الحبوب، الجروح، والزوائد الجلدية',
       image: '/images/dev3.png',
-      icon: Activity,
+      icon: ScanFace,
     },
     {
       id: 4,
-      name: 'Onda Coolwaves',
-      description: 'Localized Fat Reduction',
-      arabicDescription: 'تفتيت الدهون الموضعية',
-      image: '/technologies/onda.png',
-      icon: Waves,
+      name: 'Observ 520x',
+      description: 'Advanced Skin Analysis',
+      arabicDescription: 'كشف مشاكل البشرة العميقة والتصبغات المخفية',
+      image: '/images/dev4.png',
+      icon: Microscope, // أيقونة ميكروسكوب للفحص
     },
     {
       id: 5,
-      name: 'Schwarzy',
-      description: 'Muscle Toning & Building',
-      arabicDescription: 'بناء العضلات وشد الجسم',
-      image: '/technologies/schwarzy.png',
-      icon: Activity,
+      name: 'Aquapure',
+      description: 'Hydro-Facial & Pore Cleansing',
+      arabicDescription: 'تنظيف عميق، شد البشرة، وعلاج المسام الواسعة',
+      image: '/images/dev5.png',
+      icon: Droplets, // أيقونة قطرات للماء/التنظيف
     },
     {
       id: 6,
-      name: 'Morpheus8',
+      name: 'Q-Switched Laser',
+      description: 'Tattoo & Pigmentation Removal',
+      arabicDescription: 'إزالة التاتو، النمش، الوحمات، والتقشير الكربوني',
+      image: '/images/dev6.png',
+      icon: Eraser, // أيقونة ممحاة للإزالة
+    },
+    {
+      id: 7,
+      name: 'Dermapen',
+      description: 'Microneedling for Scars',
+      arabicDescription: 'علاج آثار الحبوب وتفتيح التصبغات',
+      image: '/images/dev7.png',
+      icon: Syringe, // أيقونة قريبة للإبر
+    },
+    {
+      id: 8,
+      name: 'Vivace',
       description: 'RF Microneedling',
-      arabicDescription: 'نضارة وشد البشرة العميقة',
-      image: '/technologies/morpheus.png',
-      icon: ScanFace,
+      arabicDescription: 'نضارة وشد البشرة وعلاج المسام بدون فترة نقاهة',
+      image: '/images/dev8.png',
+      icon: Activity,
+    },
+    {
+      id: 9,
+      name: 'Hydrafacial',
+      description: 'Deep Skin Cleansing',
+      arabicDescription: 'تنظيف عميق وإزالة الرؤوس السوداء والدهون',
+      image: '/images/dev9.png',
+      icon: Droplets,
+    },
+
+    // --- أجهزة التخسيس ونحت القوام ---
+    {
+      id: 10,
+      name: 'Deka Smart Lipo',
+      description: 'Laser Liposuction',
+      arabicDescription: 'شفط الدهون بالليزر (اللغد، الذراع، البطن) في جلسة واحدة',
+      image: '/images/dev10.png',
+      icon: Activity,
+    },
+    {
+      id: 11,
+      name: 'Schwarzy',
+      description: 'Muscle Building & Toning',
+      arabicDescription: 'بناء العضلات وشد الجسم بالموجات المغناطيسية',
+      image: '/images/dev11.png',
+      icon: Zap,
+    },
+    {
+      id: 12,
+      name: 'Onda Coolwaves',
+      description: 'Body Contouring & Fat Melting',
+      arabicDescription: 'نحت الجسم وإذابة الدهون بنسبة 80% بالموجات الباردة',
+      image: '/images/dev12.png',
+      icon: Waves,
+    },
+    {
+      id: 13,
+      name: 'Cryolipolysis',
+      description: 'Fat Freezing',
+      arabicDescription: 'تجميد الدهون (يعمل على 4 مناطق في وقت واحد)',
+      image: '/images/dev13.png',
+      icon: Snowflake, // أيقونة ندفة الثلج للتجميد
+    },
+    {
+      id: 14,
+      name: 'Cavitation',
+      description: 'Non-Surgical Fat Reduction',
+      arabicDescription: 'تفتيت الدهون الموضعية بالموجات فوق الصوتية',
+      image: '/images/dev14.png',
+      icon: Activity,
     },
   ];
 
-  const duplicatedTech = [...technologies, ...technologies, ...technologies, ...technologies];
+  // تكرار القائمة لضمان استمرار الحركة في الشريط (Marquee)
+  // بما أن القائمة أصبحت طويلة (14 جهاز)، التكرار مرتين كافٍ جداً
+  const duplicatedTech = [...technologies, ...technologies];
 
   return (
     <section className="relative py-24 bg-[#05151F] overflow-hidden">
@@ -120,7 +192,7 @@ const TechnologiesSection = () => {
               x: {
                 repeat: Infinity,
                 repeatType: "loop",
-                duration: 50,
+                duration: 80, // قمت بزيادة الوقت لأن عدد الكروت زاد، لكي لا تكون الحركة سريعة جداً
                 ease: "linear",
               },
             }}
@@ -150,30 +222,24 @@ const TechCard = ({ tech, isRTL }: { tech: Technology, isRTL: boolean }) => {
         
         <div className="h-full flex flex-col p-6 relative z-10">
           
-          {/* 1. Header (Icon + Number) */}
+          {/* Header */}
           <div className="flex justify-between items-start mb-2">
             <div className="p-2.5 rounded-full bg-white/5 border border-white/10 group-hover:bg-yellow-500 text-slate-300 group-hover:text-black transition-colors duration-300">
               <Icon className="w-5 h-5" />
             </div>
             <span className="text-[10px] font-mono text-slate-600 group-hover:text-yellow-500 transition-colors">
-              DEV-0{tech.id}
+              DEV-{String(tech.id).padStart(2, '0')}
             </span>
           </div>
 
-          {/* 2. Image Area (Improved Radius & Performance) */}
+          {/* Image Area */}
           <div className="relative h-[160px] w-full flex items-center justify-center my-4 p-1">
-            
-            {/* حاوية الصورة الجديدة مع Radius وإخفاء الزوائد */}
             <div className="relative w-full h-full rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-500 group-hover:shadow-[0_0_15px_rgba(234,179,8,0.15)]">
-                
-                {/* توهج خلفي محسن داخل الإطار */}
                 <div className="absolute inset-0 bg-gradient-to-tr from-yellow-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-md" />
-                
                 <img 
                   src={tech.image} 
                   alt={tech.name}
-                  loading="lazy" // تحسين الأداء: تحميل كسول
-                  // transform-gpu: تحسين الأداء باستخدام كارت الشاشة لحركة ناعمة
+                  loading="lazy"
                   className="relative z-10 w-full h-full object-contain drop-shadow-md grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105 transform-gpu"
                   onError={(e) => {
                     e.currentTarget.style.display = 'none';
@@ -184,7 +250,7 @@ const TechCard = ({ tech, isRTL }: { tech: Technology, isRTL: boolean }) => {
             </div>
           </div>
 
-          {/* 3. Footer Text */}
+          {/* Footer Text */}
           <div className="mt-auto border-t border-white/5 pt-4">
             <h3 className="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors font-cairo truncate">
               {tech.name}
