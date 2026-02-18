@@ -22,7 +22,7 @@ const doctors: Doctor[] = [
     specialty: 'Dermatology & Laser Specialist',
     specialtyAr: 'أخصائية الأمراض الجلدية والليزر',
     // صورة تخيلية (استبدلها بصورة الدكتورة الحقيقية)
-    image: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070&auto=format&fit=crop', 
+    image: 'images/drsally.png', 
     icon: Stethoscope,
   },
   {
@@ -31,7 +31,7 @@ const doctors: Doctor[] = [
     nameAr: 'د. فريحان زكريا',
     specialty: 'Dermatology & Aesthetics Consultant',
     specialtyAr: 'استشاري الجلدية والتجميل',
-    image: 'https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=1974&auto=format&fit=crop',
+    image: 'images/drfreehan.png',
     icon: Stethoscope,
   },
   {
@@ -40,7 +40,7 @@ const doctors: Doctor[] = [
     nameAr: 'د. مي مجدي',
     specialty: 'Clinical Nutrition Consultant',
     specialtyAr: 'استشاري التغذية العلاجية',
-    image: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=1964&auto=format&fit=crop',
+    image: 'images/drmay.png',
     icon: Apple,
   },
   {
