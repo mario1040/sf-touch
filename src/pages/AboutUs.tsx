@@ -174,7 +174,7 @@ const AboutUs = () => {
             {/* Profile Image Space (Can be a real image) */}
             <div className="md:w-2/5 relative min-h-[300px] md:min-h-[500px] bg-slate-900">
               <img 
-                src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=2070&auto=format&fit=crop" 
+                src="\images\ai-generative-happy-business-man-in-a-suit-white-background-free-photo.jpg" 
                 alt="Medical Director" 
                 className="absolute inset-0 w-full h-full object-cover opacity-60 grayscale mix-blend-luminosity"
               />
