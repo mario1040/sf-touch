@@ -1,26 +1,17 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
-import { Percent, Gift, Star, Clock, Copy, Check, Sparkles } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Percent, Gift, Star, Clock, Copy, Check, Sparkles, ArrowRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
-// 1. تعريف واجهة لنوع البيانات (Offer Interface)
 interface Offer {
+  id: string;
   icon: React.ElementType;
   title: string;
   value: string;
   description: string;
   code: string;
-  bgColor: string;
-  textColor: string;
-  borderColor: string;
-}
-
-// 2. تعريف واجهة لخصائص الكارت (Props Interface)
-interface CouponCardProps {
-  offer: Offer;
-  isRTL: boolean;
-  index: number;
+  gradient: string;
 }
 
 const Offers = () => {
@@ -28,108 +19,71 @@ const Offers = () => {
 
   const offers: Offer[] = [
     {
-      icon: Percent,
-      title: language === 'ar' ? 'خصم الليزر' : 'Laser Discount',
+      id: '01',
+      icon: Sparkles,
+      title: language === 'ar' ? 'باقة النضارة الشاملة' : 'Full Glow Package',
       value: '20%',
-      description: language === 'ar'
-        ? 'خصم فوري عند حجز باقة 6 جلسات للجسم كامل'
-        : 'Instant discount on booking a 6-session full body package',
-      code: 'LASER20',
-      bgColor: 'bg-rose-50',
-      textColor: 'text-rose-600',
-      borderColor: 'border-rose-100'
+      description: language === 'ar' ? 'خصم فوري عند حجز باقة الليزر للجسم بالكامل' : 'Instant 20% off on full body laser packages',
+      code: 'GLOW20',
+      gradient: 'from-rose-100 via-rose-50 to-white'
     },
     {
+      id: '02',
       icon: Gift,
-      title: language === 'ar' ? 'هدية مجانية' : 'Free Gift',
+      title: language === 'ar' ? 'هدية الجمال' : 'Beauty Gift',
       value: 'FREE',
-      description: language === 'ar'
-        ? 'جلسة هيدرافيشل مجانية مع خدمات بقيمة 3000 جنيه'
-        : 'Free HydraFacial session with services worth 3000 EGP',
+      description: language === 'ar' ? 'جلسة هيدرافيشل مجانية مع خدمات بقيمة 3000 جنيه' : 'Complimentary HydraFacial with services over 3000 EGP',
       code: 'HYDRA-GIFT',
-      bgColor: 'bg-blue-50',
-      textColor: 'text-blue-600',
-      borderColor: 'border-blue-100'
+      gradient: 'from-blue-100 via-blue-50 to-white'
     },
     {
+      id: '03',
       icon: Star,
-      title: language === 'ar' ? 'باقة العروس' : 'Bridal Package',
+      title: language === 'ar' ? 'بكج العروسة' : 'Bridal Queen',
       value: 'VIP',
-      description: language === 'ar'
-        ? 'بكج الملكة: عناية شاملة بالبشرة والجسم قبل الزفاف'
-        : 'Queen Package: Complete skin and body care before wedding',
+      description: language === 'ar' ? 'تجهيزات متكاملة للبشرة والقوام قبل ليلة الزفاف' : 'Comprehensive skin & body prep before the big day',
       code: 'BRIDE2024',
-      bgColor: 'bg-amber-50',
-      textColor: 'text-amber-600',
-      borderColor: 'border-amber-100'
+      gradient: 'from-amber-100 via-amber-50 to-white'
     },
     {
+      id: '04',
       icon: Clock,
-      title: language === 'ar' ? 'كشف مجاني' : 'Free Checkup',
+      title: language === 'ar' ? 'استشارة مجانية' : 'Free Consult',
       value: '0 EGP',
-      description: language === 'ar'
-        ? 'استشارة أولية مجانية للأعضاء الجدد لفترة محدودة'
-        : 'Free initial consultation for new members for a limited time',
+      description: language === 'ar' ? 'جلسة تقييم حالة مجانية مع أخصائي التغذية' : 'Free initial assessment with our nutrition expert',
       code: 'CONSULT',
-      bgColor: 'bg-emerald-50',
-      textColor: 'text-emerald-600',
-      borderColor: 'border-emerald-100'
+      gradient: 'from-emerald-100 via-emerald-50 to-white'
     },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50/50 pt-32 pb-20">
+    <div className="min-h-screen bg-[#FDFCF8] pt-32 pb-24 overflow-hidden selection:bg-amber-100">
       
-      {/* ================= HEADER ================= */}
-      <div className="container px-4 mx-auto mb-16 text-center">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm mb-6"
-        >
-           <Sparkles className="w-4 h-4 text-yellow-500" />
-           <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-             {language === 'ar' ? 'عروض محدودة' : 'Limited Time Offers'}
-           </span>
+      {/* BACKGROUND ELEMENTS */}
+      <div className="fixed inset-0 pointer-events-none opacity-[0.03] bg-[radial-gradient(#000_1px,transparent_1px)] [background-size:24px_24px]" />
+      
+      <div className="container px-6 mx-auto max-w-7xl">
+        {/* HEADER */}
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-24">
+          <span className="text-amber-600 font-black tracking-[0.3em] uppercase text-[10px]">{language === 'ar' ? 'فرص استثنائية' : 'Exclusive Opportunities'}</span>
+          <h1 className="text-5xl md:text-7xl font-black text-slate-900 mt-4 mb-6 tracking-tight font-cairo">
+            {language === 'ar' ? 'عروض صممت لجمالك' : 'Designed for your Beauty'}
+          </h1>
         </motion.div>
 
-        <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 font-cairo">
-           {language === 'ar' ? 'دليلك للتوفير والجمال' : 'Your Guide to Beauty & Savings'}
-        </h1>
-        <p className="text-slate-500 text-lg max-w-2xl mx-auto font-light">
-           {language === 'ar' 
-             ? 'استمتعي بأفضل الخدمات بأفضل الأسعار. صممنا هذه الباقات خصيصاً لراحتك.'
-             : 'Enjoy the best services at the best prices. These packages are designed for your comfort.'}
-        </p>
-      </div>
-
-      {/* ================= COUPONS GRID ================= */}
-      <div className="container px-4 mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-           {offers.map((offer, index) => (
-              <CouponCard key={index} offer={offer} isRTL={isRTL} index={index} />
-           ))}
+        {/* BENTO GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 auto-rows-[300px]">
+          {offers.map((offer, index) => (
+            <OfferCard key={offer.id} offer={offer} index={index} isRTL={isRTL} />
+          ))}
         </div>
       </div>
-
-      {/* ================= CALL TO ACTION ================= */}
-      <div className="container px-4 mx-auto mt-20 text-center">
-         <p className="text-slate-400 text-sm mb-6">
-            {language === 'ar' ? '* تطبق الشروط والأحكام على جميع العروض' : '* Terms and conditions apply'}
-         </p>
-         <Button size="lg" className="rounded-full px-10 py-6 text-lg bg-slate-900 hover:bg-slate-800 text-white shadow-xl shadow-slate-200 transition-all hover:-translate-y-1">
-            {language === 'ar' ? 'احجزي موعدك الآن' : 'Book Appointment Now'}
-         </Button>
-      </div>
-
     </div>
   );
 };
 
-// ================= COUPON CARD COMPONENT =================
-// 3. استخدام الواجهة (Interface) هنا بدلاً من any
-const CouponCard = ({ offer, isRTL, index }: CouponCardProps) => {
+// ================= OFFER CARD =================
+const OfferCard = ({ offer, index, isRTL }: { offer: Offer, index: number, isRTL: boolean }) => {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = () => {
@@ -140,71 +94,36 @@ const CouponCard = ({ offer, isRTL, index }: CouponCardProps) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      className="group bg-white rounded-3xl border border-slate-100 shadow-[0_2px_20px_rgba(0,0,0,0.04)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-all duration-300 overflow-hidden flex flex-col sm:flex-row h-auto sm:h-48"
+      initial={{ opacity: 0, scale: 0.9 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      className={cn(
+        "group relative p-8 rounded-[2.5rem] border border-black/5 overflow-hidden flex flex-col justify-between transition-all duration-700 hover:shadow-2xl",
+        `bg-gradient-to-br ${offer.gradient}`,
+        index % 3 === 0 ? "md:col-span-2" : "md:col-span-1"
+      )}
     >
-       {/* Left Side (Visual / Value) */}
-       <div className={`sm:w-32 p-6 flex flex-col items-center justify-center gap-2 ${offer.bgColor} transition-colors`}>
-          <div className={`p-3 rounded-full bg-white/80 backdrop-blur-sm shadow-sm`}>
-             <offer.icon className={`w-6 h-6 ${offer.textColor}`} />
-          </div>
-          <span className={`text-2xl font-black ${offer.textColor}`}>
-             {offer.value}
-          </span>
-       </div>
+      {/* Decorative Glow */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-white/50 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2 group-hover:bg-white/80 transition-all duration-700" />
 
-       {/* Middle (Content) */}
-       <div className="flex-1 p-6 flex flex-col justify-center relative">
-          {/* Dashed line on mobile */}
-          <div className="absolute top-0 left-6 right-6 h-px border-t-2 border-dashed border-slate-100 sm:hidden" />
-          {/* Dashed line on desktop */}
-          <div className={`absolute top-6 bottom-6 w-px border-l-2 border-dashed border-slate-100 hidden sm:block ${isRTL ? 'right-0' : 'left-0'}`} />
+      <div className="relative z-10">
+        <div className="w-12 h-12 rounded-full bg-white/60 flex items-center justify-center mb-6 shadow-sm">
+          <offer.icon className="w-6 h-6 text-slate-900" />
+        </div>
+        <h3 className="text-2xl font-bold text-slate-900 mb-2 font-cairo">{offer.title}</h3>
+        <p className="text-slate-600 text-sm max-w-xs">{offer.description}</p>
+      </div>
 
-          <h3 className="text-xl font-bold text-slate-900 mb-2 font-cairo">
-             {offer.title}
-          </h3>
-          <p className="text-sm text-slate-500 leading-relaxed mb-4">
-             {offer.description}
-          </p>
-
-          {/* Code Section */}
-          <div 
-             onClick={handleCopy}
-             className="flex items-center justify-between bg-slate-50 border border-slate-100 border-dashed rounded-lg px-3 py-2 cursor-pointer hover:bg-slate-100 transition-colors group/code"
-          >
-             <div className="flex flex-col">
-                <span className="text-[10px] text-slate-400 uppercase tracking-wider font-medium">
-                   {isRTL ? 'كود الخصم' : 'Promo Code'}
-                </span>
-                <span className="font-mono font-bold text-slate-800 tracking-wider">
-                   {offer.code}
-                </span>
-             </div>
-             
-             <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm text-slate-400 group-hover/code:text-slate-900 transition-colors">
-                <AnimatePresence mode='wait'>
-                   {copied ? (
-                      <motion.div
-                        key="check"
-                        initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
-                      >
-                         <Check className="w-4 h-4 text-emerald-500" />
-                      </motion.div>
-                   ) : (
-                      <motion.div
-                        key="copy"
-                        initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
-                      >
-                         <Copy className="w-4 h-4" />
-                      </motion.div>
-                   )}
-                </AnimatePresence>
-             </div>
-          </div>
-       </div>
+      <div className="relative z-10 flex items-center justify-between mt-8">
+        <span className="text-4xl font-black text-slate-900">{offer.value}</span>
+        
+        <button 
+          onClick={handleCopy}
+          className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-slate-900 text-white font-bold text-xs hover:bg-slate-800 transition-all active:scale-95"
+        >
+          {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+          {copied ? (isRTL ? 'تم النسخ' : 'Copied') : offer.code}
+        </button>
+      </div>
     </motion.div>
   );
 };

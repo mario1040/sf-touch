@@ -1,180 +1,263 @@
 import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform, Variants } from 'framer-motion';
-import { ArrowRight, Sparkles, Apple, Scissors, Activity, ScanFace, Zap } from 'lucide-react';
+import { 
+  ArrowRight, 
+  Sparkles, 
+  Apple, 
+  Scissors, 
+  Activity, 
+  ShieldCheck, 
+  Stethoscope, 
+  ChevronRight, 
+  Award 
+} from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
-import { cn } from '@/lib/utils';
+
+type ServiceItem = {
+  id: string;
+  title: string;
+  description: string;
+  icon: React.ElementType;
+  image: string;
+  href: string;
+  gridClass: string;
+  accent: string;
+};
 
 const ServicesSection = () => {
   const { t, isRTL } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  // تأثير Parallax بسيط للخلفية
   const { scrollYProgress } = useScroll({
     target: sectionRef,
-    offset: ["start end", "end start"]
+    offset: ['start end', 'end start'],
   });
-  const yBg = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
-  const services = [
+  // تأثيرات بارالاكس متطورة للخلفية
+  const y1 = useTransform(scrollYProgress, [0, 1], ['-20%', '20%']);
+  const y2 = useTransform(scrollYProgress, [0, 1], ['10%', '-30%']);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 45]);
+
+  const services: ServiceItem[] = [
     {
       id: '01',
-      title: t.services.dermatology.title, // "الجلدية والليزر"
-      description: t.services.dermatology.description,
+      title: t.services?.dermatology?.title || (isRTL ? 'الجلدية والليزر' : 'Dermatology & Laser'),
+      description: t.services?.dermatology?.description || (isRTL ? 'تقنيات ليزر متطورة وبروتوكولات علاجية لبشرة نقية ومشرقة.' : 'Advanced laser tech and protocols for flawless, radiant skin.'),
       icon: Sparkles,
-      image: 'https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?q=80&w=2070&auto=format&fit=crop', // صورة ليزر/جلدية
+      image: '/images/64b91e60ee991bc3355749ae_laser.jpeg',
       href: '/services/dermatology-laser',
-      color: 'text-purple-400',
-      bgGradient: 'from-purple-500/20 to-blue-500/20'
+      gridClass: 'md:col-span-2 md:row-span-2 min-h-[400px] md:min-h-[500px]',
+      accent: 'from-amber-500/40 via-orange-500/20 to-transparent',
     },
     {
       id: '02',
-      title: t.services.nutrition.title, // "التغذية العلاجية"
-      description: t.services.nutrition.description,
-      icon: Apple,
-      image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=2053&auto=format&fit=crop', // صورة طعام صحي
+      title: t.services?.nutrition?.title || (isRTL ? 'التغذية ونحت القوام' : 'Nutrition & Contouring'),
+      description: t.services?.nutrition?.description || (isRTL ? 'خطط طبية متكاملة للوصول إلى الوزن المثالي والقوام المتناسق.' : 'Comprehensive medical plans for your ideal weight and shape.'),
+      icon: Activity,
+      image: '/images/images (2).jpg',
       href: '/services/nutrition-contouring',
-      color: 'text-green-400',
-      bgGradient: 'from-green-500/20 to-emerald-500/20'
+      gridClass: 'md:col-span-1 min-h-[300px]',
+      accent: 'from-emerald-500/40 via-teal-500/20 to-transparent',
     },
     {
       id: '03',
-      title: t.services.hair.title, // "علاج الشعر"
-      description: t.services.hair.description,
+      title: t.services?.hair?.title || (isRTL ? 'زراعة وعلاج الشعر' : 'Hair Restoration'),
+      description: t.services?.hair?.description || (isRTL ? 'أحدث التقنيات لاستعادة كثافة الشعر وحيويته بأسلوب طبيعي.' : 'Latest technologies to restore hair density and natural vitality.'),
       icon: Scissors,
-      image: 'https://images.unsplash.com/photo-1595476103518-3c18c81f1a0a?q=80&w=2070&auto=format&fit=crop', // صورة شعر صحي
+      image: '/images/2641925.webp',
       href: '/services/hair-restoration',
-      color: 'text-yellow-400',
-      bgGradient: 'from-yellow-500/20 to-orange-500/20'
+      gridClass: 'md:col-span-1 min-h-[300px]',
+      accent: 'from-blue-500/40 via-indigo-500/20 to-transparent',
     },
   ];
 
-  // Animation Variants
-  const containerVariants = {
-    hidden: { opacity: 0 },
+  const fadeUpVariants: Variants = {
+    hidden: { opacity: 0, y: 40, filter: 'blur(8px)' },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
+      y: 0,
+      filter: 'blur(0px)',
+      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    },
   };
 
   const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.8, ease: "easeOut" } 
-    }
+    hidden: { opacity: 0, scale: 0.95, y: 20 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] },
+    },
   };
 
+  const clinicHighlights = [
+    { icon: Stethoscope, label: isRTL ? 'إشراف طبي دقيق' : 'Expert Medical Care' },
+    { icon: ShieldCheck, label: isRTL ? 'أجهزة معتمدة عالمياً' : 'FDA Approved Tech' },
+    { icon: Award, label: isRTL ? 'نتائج طبيعية ومضمونة' : 'Natural & Proven Results' },
+  ];
+
   return (
-    <section 
-      id="services" 
-      ref={sectionRef} 
-      className="relative py-24 bg-white overflow-hidden"
+    <section
+      ref={sectionRef}
+      id="services"
+      dir={isRTL ? 'rtl' : 'ltr'}
+      className="relative isolate overflow-hidden bg-[#fafafa] py-24 sm:py-32"
     >
-       {/* ================= BACKGROUND DECORATION ================= */}
-       {/* نقش خفيف جداً في الخلفية */}
-       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:32px_32px] opacity-60 pointer-events-none" />
-       
-       {/* دائرة لونية متحركة */}
-       <motion.div 
-         style={{ y: yBg }}
-         className="absolute top-0 right-0 w-[600px] h-[600px] bg-slate-100 rounded-full blur-[100px] -z-10 opacity-70"
-       />
-
-      <div className="container mx-auto px-4 sm:px-6 relative z-10">
-        
-        {/* ================= HEADER ================= */}
+      {/* Background Aesthetics */}
+      <div className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-[0.03] mix-blend-overlay" />
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="text-center mb-20 max-w-3xl mx-auto"
-        >
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <span className="h-px w-8 bg-yellow-500"></span>
-            <span className="text-yellow-600 font-bold text-xs uppercase tracking-widest">
-              {t.services.subtitle || (isRTL ? 'خدماتنا المتكاملة' : 'Our Expertise')}
-            </span>
-            <span className="h-px w-8 bg-yellow-500"></span>
-          </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 font-cairo">
-            {isRTL ? 'رعاية طبية تفوق' : 'Medical Care Beyond'} <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-600 to-yellow-500">
-              {isRTL ? 'التوقعات' : 'Expectations'}
-            </span>
-          </h2>
-          <p className="text-slate-500 text-lg leading-relaxed">
-            {isRTL 
-              ? 'نقدم لكِ مجموعة شاملة من الخدمات التجميلية والعلاجية المصممة خصيصاً لإبراز جمالك الطبيعي.'
-              : 'We provide a comprehensive range of aesthetic and therapeutic services designed specifically to highlight your natural beauty.'}
-          </p>
-        </motion.div>
-
-        {/* ================= SERVICES CARDS ================= */}
+          style={{ y: y1, rotate }}
+          className="absolute -right-64 -top-64 h-[40rem] w-[40rem] rounded-full bg-gradient-to-br from-amber-200/40 to-orange-100/20 blur-3xl"
+        />
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid grid-cols-1 lg:grid-cols-3 gap-8"
-        >
-          {services.map((service) => (
-            <motion.div key={service.id} variants={cardVariants} className="h-full">
-              <Link to={service.href} className="group relative block h-[500px] w-full overflow-hidden rounded-[2rem] shadow-2xl transition-all duration-500 hover:-translate-y-2">
-                
-                {/* 1. Background Image */}
-                <div className="absolute inset-0 h-full w-full">
-                  <img 
-                    src={service.image} 
-                    alt={service.title} 
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  />
-                  {/* Overlay Gradient (Dark at bottom for text) */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#05151F] via-[#05151F]/40 to-transparent opacity-80 group-hover:opacity-70 transition-opacity duration-500" />
-                </div>
+          style={{ y: y2 }}
+          className="absolute -left-32 bottom-0 h-[30rem] w-[30rem] rounded-full bg-gradient-to-tr from-slate-300/40 to-zinc-200/20 blur-3xl"
+        />
+      </div>
 
-                {/* 2. Top Content (Icon & Number) */}
-                <div className="absolute top-0 left-0 right-0 p-8 flex justify-between items-start z-20">
-                   <div className={`p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 text-white shadow-lg group-hover:bg-yellow-500 group-hover:text-black transition-colors duration-300`}>
-                      <service.icon className="w-8 h-8" />
-                   </div>
-                   <span className="text-6xl font-bold text-white/10 font-mono tracking-tighter select-none">
-                      {service.id}
-                   </span>
-                </div>
+      <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-16 lg:grid-cols-12 lg:gap-12 items-center">
+          
+          {/* Clinic Intro / Copywriting */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ staggerChildren: 0.15 }}
+            className={`lg:col-span-4 ${isRTL ? 'text-right' : 'text-left'}`}
+          >
+            <motion.div variants={fadeUpVariants} className="mb-6 inline-flex">
+              <div className={`flex items-center gap-2 rounded-full border border-amber-200/50 bg-amber-50/50 px-5 py-2.5 shadow-sm backdrop-blur-sm ${isRTL ? 'flex-row-reverse' : ''}`}>
+                <div className="flex h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+                <span className="text-xs font-bold uppercase tracking-widest text-amber-800">
+                  {isRTL ? 'تميز طبي، لمسة فنية' : 'Medical Excellence'}
+                </span>
+              </div>
+            </motion.div>
 
-                {/* 3. Bottom Content (Glass Card) */}
-                <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                  <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-3xl p-6 overflow-hidden relative group-hover:bg-white/20 transition-colors duration-300">
-                    
-                    {/* Glowing effect inside card */}
-                    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.bgGradient} rounded-full blur-2xl -z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+            <motion.h2
+              variants={fadeUpVariants}
+              className="font-cairo text-4xl font-black leading-[1.15] text-slate-900 sm:text-5xl lg:text-6xl"
+            >
+              {isRTL ? (
+                <>
+                  أبرزي <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-400">جمالكِ</span>
+                  <br /> برعاية طبية فائقة
+                </>
+              ) : (
+                <>
+                  Elevate your <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-400">Beauty</span>
+                  <br /> with expert care
+                </>
+              )}
+            </motion.h2>
 
-                    <h3 className="text-2xl font-bold text-white mb-3 font-cairo">
-                      {service.title}
-                    </h3>
-                    
-                    <p className="text-slate-300 text-sm leading-relaxed mb-6 line-clamp-2 group-hover:text-white transition-colors">
-                      {service.description}
-                    </p>
+            <motion.p
+              variants={fadeUpVariants}
+              className="mt-6 text-base leading-relaxed text-slate-600 sm:text-lg"
+            >
+              {isRTL
+                ? 'في عيادتنا، ندمج بين أحدث التطورات الطبية والرؤية التجميلية لنقدم لكِ رحلة علاجية آمنة، مخصصة، ومصممة لتمنحكِ الثقة التي تستحقينها.'
+                : 'At our clinic, we merge the latest medical advancements with an aesthetic vision to provide a safe, personalized journey designed to give you the confidence you deserve.'}
+            </motion.p>
 
-                    <div className="flex items-center gap-2 text-yellow-400 font-bold text-sm tracking-wide uppercase">
-                      <span>{t.services.learnMore || (isRTL ? 'اعرفي المزيد' : 'Learn More')}</span>
-                      <div className={`w-8 h-8 rounded-full bg-yellow-500/20 flex items-center justify-center transition-all duration-300 group-hover:bg-yellow-500 group-hover:text-black group-hover:translate-x-2 ${isRTL ? 'group-hover:-translate-x-2' : ''}`}>
-                         <ArrowRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
-                      </div>
+            <motion.div variants={fadeUpVariants} className="mt-8 flex flex-col gap-4">
+              {clinicHighlights.map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <div key={idx} className={`flex items-center gap-4 ${isRTL ? 'flex-row-reverse' : ''}`}>
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white shadow-sm border border-slate-100">
+                      <Icon className="h-5 w-5 text-amber-500" />
                     </div>
-
+                    <span className="font-semibold text-slate-700">{item.label}</span>
                   </div>
-                </div>
+                );
+              })}
+            </motion.div>
 
+            <motion.div variants={fadeUpVariants} className="mt-10">
+              <Link
+                to="/services"
+                className={`group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-slate-900 px-8 py-4 font-bold text-white transition-all hover:bg-slate-800 hover:shadow-xl hover:shadow-slate-900/20 active:scale-95 ${isRTL ? 'flex-row-reverse' : ''}`}
+              >
+                <span className="relative z-10">{isRTL ? 'احجزي استشارتك الآن' : 'Book Consultation'}</span>
+                <ArrowRight className={`relative z-10 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1 ${isRTL ? 'rotate-180 group-hover:-translate-x-1' : ''}`} />
               </Link>
             </motion.div>
-          ))}
-        </motion.div>
+          </motion.div>
+
+          {/* Creative Bento Grid for Services */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ staggerChildren: 0.1 }}
+            className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
+          >
+            {services.map((service) => {
+              const Icon = service.icon;
+              return (
+                <motion.div
+                  key={service.id}
+                  variants={cardVariants}
+                  className={service.gridClass}
+                >
+                  <Link
+                    to={service.href}
+                    className="group relative block h-full w-full overflow-hidden rounded-[2.5rem] bg-slate-900"
+                  >
+                    {/* Image with Parallax Hover */}
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="absolute inset-0 h-full w-full object-cover opacity-80 transition-all duration-700 group-hover:scale-105 group-hover:opacity-60"
+                    />
+                    
+                    {/* Medical Premium Overlays */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-900/40 to-transparent transition-opacity duration-500" />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-0 transition-opacity duration-500 group-hover:opacity-100`} />
+
+                    {/* Content Layer */}
+                    <div className="absolute inset-0 flex flex-col justify-between p-8 sm:p-10">
+                      
+                      {/* Top Header */}
+                      <div className={`flex items-start justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
+                        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white/10 text-white backdrop-blur-md border border-white/20 transition-transform duration-500 group-hover:scale-110 group-hover:bg-white/20">
+                          <Icon className="h-7 w-7" />
+                        </div>
+                        <span className="text-4xl font-black text-white/20 sm:text-5xl">
+                          {service.id}
+                        </span>
+                      </div>
+
+                      {/* Bottom Info (Animates up on hover) */}
+                      <div className={`transform transition-all duration-500 ${isRTL ? 'text-right' : 'text-left'} group-hover:-translate-y-2`}>
+                        <h3 className="font-cairo text-2xl font-bold text-white sm:text-3xl mb-3">
+                          {service.title}
+                        </h3>
+                        <p className="max-w-md text-sm leading-relaxed text-slate-300 opacity-0 transition-opacity duration-500 group-hover:opacity-100 sm:text-base">
+                          {service.description}
+                        </p>
+                        
+                        <div className={`mt-6 flex items-center gap-2 opacity-0 transition-all duration-500 delay-100 group-hover:opacity-100 ${isRTL ? 'flex-row-reverse justify-start' : ''}`}>
+                          <span className="text-sm font-bold text-amber-400">
+                            {isRTL ? 'اكتشفي التفاصيل' : 'Discover Details'}
+                          </span>
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-400/20 text-amber-400">
+                            <ChevronRight className={`h-4 w-4 ${isRTL ? 'rotate-180' : ''}`} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
       </div>
     </section>
   );
