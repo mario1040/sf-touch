@@ -212,7 +212,7 @@ const HeroSection = () => {
               <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-br from-white via-white to-slate-50 shadow-[0_30px_90px_rgba(15,23,42,0.12)]" />
               <div className="absolute inset-3 overflow-hidden rounded-[2.15rem]">
                 <img
-                  src="public\images\OES02680.jpg"
+                  src="\images\OES02680.jpg"
                   alt="Clinic hero"
                   className="h-full w-full object-cover object-center"
                 />
