@@ -86,7 +86,7 @@ const AboutUs = () => {
             >
               <div className="relative aspect-[4/5] overflow-hidden rounded-bl-[4rem] rounded-tr-[4rem] bg-slate-100">
                 <img 
-                  src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=2068&auto=format&fit=crop" 
+                  src="\images\IMG_9314 1.png" 
                   alt="Clinic Atmosphere" 
                   className="w-full h-full object-cover opacity-90 scale-105 hover:scale-100 transition-transform duration-1000"
                 />

@@ -32,6 +32,14 @@ const Footer = () => {
     { icon: Linkedin, href: "https://linkedin.com", color: "hover:bg-blue-700" },
   ];
 
+  // مصفوفة أرقام الهواتف الجديدة مع التنسيق الجمالي لكل رقم
+  const phoneNumbers = [
+    { display: "010 3174 6006", value: "01031746006" },
+    { display: "+20 155 800 8978", value: "+201558008978" },
+    { display: "010 0690 1892", value: "01006901892" },
+    { display: "+20 15 0365 6589", value: "+201503656589" },
+  ];
+
   return (
     <footer className="relative bg-[#020617] text-slate-300 overflow-hidden pt-20 pb-10">
       
@@ -112,22 +120,40 @@ const Footer = () => {
             </h4>
             <div className="space-y-6">
                <ContactItem 
-                 icon={MapPin} 
-                 title={t.footer.damietta} 
-                 desc="Safwa Mall, 2nd Floor" 
+                  icon={MapPin} 
+                  title={t.footer.damietta} 
+                  desc="Safwa Mall, 2nd Floor" 
                />
                <ContactItem 
-                 icon={MapPin} 
-                 title={t.footer.newDamietta} 
-                 desc="Central Zone, 1st Floor" 
+                  icon={MapPin} 
+                  title={t.footer.newDamietta} 
+                  desc="Central Zone, 1st Floor" 
                />
-               <ContactItem 
-                 icon={Phone} 
-                 title={isRTL ? "اتصل بنا" : "Call Us"} 
-                 desc="0572260062" 
-                 isLink 
-                 href="tel:0572260062"
-               />
+               
+               {/* قسم أرقام الهواتف الإبداعي والمطور */}
+               <div className="flex gap-4 group cursor-default">
+                  <div className="w-10 h-10 rounded-full bg-slate-900 flex items-center justify-center border border-slate-800 group-hover:border-yellow-500/50 group-hover:bg-yellow-500/10 transition-all duration-300 shrink-0">
+                     <Phone className="w-5 h-5 text-slate-400 group-hover:text-yellow-500 transition-colors" />
+                  </div>
+                  <div className="space-y-2 flex-1">
+                     <p className="text-white font-bold text-sm group-hover:text-yellow-500 transition-colors">
+                        {isRTL ? "أرقام الحجز والاستفسار" : "Booking & Support"}
+                     </p>
+                     <div className="grid grid-cols-1 xl:grid-cols-2 gap-x-4 gap-y-2">
+                        {phoneNumbers.map((phone, idx) => (
+                           <a 
+                              key={idx}
+                              href={`tel:${phone.value}`}
+                              dir="ltr"
+                              className="text-xs text-slate-400 hover:text-yellow-400 flex items-center gap-1.5 transition-colors group/num duration-200 font-mono tracking-wider justify-start"
+                           >
+                              <span className="w-1 h-1 rounded-full bg-slate-600 group-hover/num:bg-yellow-500 transition-colors shrink-0" />
+                              <span>{phone.display}</span>
+                           </a>
+                        ))}
+                     </div>
+                  </div>
+               </div>
             </div>
           </div>
 
@@ -152,12 +178,12 @@ const Footer = () => {
                </div>
             </div>
 
-            {/* Newsletter Input (Optional decorative element) */}
+            {/* Newsletter Input */}
             <div className="relative">
                <input 
-                 type="email" 
-                 placeholder={isRTL ? 'اشتركي في النشرة...' : 'Subscribe newsletter...'} 
-                 className="w-full bg-slate-900 border border-slate-800 rounded-full py-3 px-4 text-sm text-white focus:outline-none focus:border-yellow-500 transition-colors"
+                  type="email" 
+                  placeholder={isRTL ? 'اشتركي في النشرة...' : 'Subscribe newsletter...'} 
+                  className="w-full bg-slate-900 border border-slate-800 rounded-full py-3 px-4 text-sm text-white focus:outline-none focus:border-yellow-500 transition-colors"
                />
                <button className={`absolute top-1/2 -translate-y-1/2 bg-yellow-500 rounded-full p-2 text-black hover:bg-yellow-400 transition-colors ${isRTL ? 'left-1.5' : 'right-1.5'}`}>
                   <ArrowRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />

@@ -13,14 +13,14 @@ const ContactUs = () => {
       id: '01',
       name: t.footer?.damietta || (isRTL ? 'فرع دمياط' : 'Damietta Branch'),
       address: isRTL ? 'مول صفوة، الدور الثاني' : 'Safwa Mall, 2nd Floor',
-      phone: '0572260062',
+      phones: ['01031746006', '+20 155 800 8978'],
       mapUrl: 'https://maps.google.com',
     },
     {
       id: '02',
       name: t.footer?.newDamietta || (isRTL ? 'فرع دمياط الجديدة' : 'New Damietta'),
       address: isRTL ? 'المنطقة المركزية' : 'Central Zone',
-      phone: '0572260063',
+      phones: ['01006901892', '+20 15 03656589'],
       mapUrl: 'https://maps.google.com',
     },
   ];
@@ -122,14 +122,23 @@ const ContactUs = () => {
                       </div>
                     </div>
 
-                    {/* Phone Line */}
-                    <div className={cn("flex items-center gap-4", isRTL ? "flex-row-reverse" : "")}>
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-slate-50 text-slate-400 transition-colors group-hover:bg-amber-50 group-hover:text-amber-600">
+                    {/* Phone Lines */}
+                    <div className={cn("flex items-start gap-4", isRTL ? "flex-row-reverse" : "")}>
+                      <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-slate-50 text-slate-400 transition-colors group-hover:bg-amber-50 group-hover:text-amber-600">
                         <Phone className="w-5 h-5 stroke-[1.5]" />
                       </div>
-                      <a href={`tel:${branch.phone}`} className="text-slate-600 font-medium hover:text-slate-900 transition-colors text-lg" dir="ltr">
-                        {branch.phone}
-                      </a>
+                      <div className="space-y-2">
+                        {branch.phones.map((phone, phoneIndex) => (
+                          <a
+                            key={phoneIndex}
+                            href={`tel:${phone.replace(/\s+/g, '')}`}
+                            className="block text-slate-600 font-medium hover:text-slate-900 transition-colors text-lg"
+                            dir="ltr"
+                          >
+                            {phone}
+                          </a>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
