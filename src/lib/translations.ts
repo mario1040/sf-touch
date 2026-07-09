@@ -181,8 +181,8 @@ export const translations: Record<Language, TranslationContent> = {
       damietta: 'Damietta - Safwa Mall',
       newDamietta: 'New Damietta - Central Zone',
       workingHours: 'Working Hours',
-      hours: 'Daily: 10 AM - 10 PM',
-      copyright: '© 2025 SF Touch Clinic. All rights reserved.',
+      hours: 'Daily: 1 PM - 1 AM',
+      copyright: '© 2026 Tungsten Media Agency. All rights reserved.',
       followUs: 'Follow Us',
     },
     contact: {
@@ -278,7 +278,7 @@ export const translations: Record<Language, TranslationContent> = {
       newDamietta: 'دمياط الجديدة - المنطقة المركزية',
       workingHours: 'ساعات العمل',
       hours: 'يومياً: ١٠ صباحاً - ١٠ مساءً',
-      copyright: '© ٢٠٢٥ عيادة إس إف تاتش. جميع الحقوق محفوظة.',
+      copyright: '© 2026 تنجستين ميديا اجينسي. جميع الحقوق محفوظة.',
       followUs: 'تابعنا',
     },
     contact: {

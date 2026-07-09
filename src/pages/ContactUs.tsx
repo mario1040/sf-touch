@@ -13,15 +13,15 @@ const ContactUs = () => {
       id: '01',
       name: t.footer?.damietta || (isRTL ? 'فرع دمياط' : 'Damietta Branch'),
       address: isRTL ? 'مول صفوة، الدور الثاني' : 'Safwa Mall, 2nd Floor',
-      phones: ['01031746006', '+20 155 800 8978'],
-      mapUrl: 'https://maps.google.com',
+      phones: ['01006901892', '01503656589','01031746006', '01558008978'],
+      mapUrl: 'https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.bing.com%2Fmaps%2Fdefault.aspx%3Fv%3D2%26pc%3DFACEBK%26mid%3D8100%26where1%3D%25D8%25AF%25D9%2585%25D9%258A%25D8%25A7%25D8%25B7%2520%25D8%25A7%25D9%2584%25D9%2582%25D8%25AF%25D9%258A%25D9%2585%25D8%25A9%2520%25D8%25A7%25D9%2584%25D8%25B5%25D9%2581%25D9%2588%25D8%25A9%2520%25D9%2585%25D9%2588%25D9%2584%2520-%2520%25D8%25A8%25D8%25B1%25D8%25AC%25202%2520-%2520%25D8%25A7%25D9%2584%25D8%25AF%25D9%2588%25D8%25B1%2520%25D8%25A7%25D9%2584%25D8%25AE%25D8%25A7%25D9%2585%25D8%25B3%2520-%2520%25D8%25B4%25D9%2582%25D8%25A9%25208%252C%2520Damietta%252C%2520Egypt%26FORM%3DFBKPL1%26mkt%3Den-GB%26fbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExTHJPbXU1MjJlbHhWMEc2THNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR7Vk4jXc-1tmq5NtmXZnkanP8UM4XxGvK4VHoYZxlu5rzz85KON-dG4BiE3cw_aem_6_azjJNvW9dZSr_rIV1dXQ&h=AUAGq-9EPxt6oIe3_qk2RjpiGZOe1uOGzNpFZV75PCiL-fjWPR9F5-EVmzV7qsP0Oe9obI_xoGPmTTYdjnXKDzDym178GotZkKAxJ2bbgYXbIa1UWHSSQm8dofk7G9xvM-m_',
     },
     {
       id: '02',
       name: t.footer?.newDamietta || (isRTL ? 'فرع دمياط الجديدة' : 'New Damietta'),
       address: isRTL ? 'المنطقة المركزية' : 'Central Zone',
-      phones: ['01006901892', '+20 15 03656589'],
-      mapUrl: 'https://maps.google.com',
+      phones: ['01006901892', '01503656589', '01031746006', '01558008978'],
+      mapUrl: 'https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.bing.com%2Fmaps%2Fdefault.aspx%3Fv%3D2%26pc%3DFACEBK%26mid%3D8100%26where1%3D%25D8%25AF%25D9%2585%25D9%258A%25D8%25A7%25D8%25B7%2520%25D8%25A7%25D9%2584%25D9%2582%25D8%25AF%25D9%258A%25D9%2585%25D8%25A9%2520%25D8%25A7%25D9%2584%25D8%25B5%25D9%2581%25D9%2588%25D8%25A9%2520%25D9%2585%25D9%2588%25D9%2584%2520-%2520%25D8%25A8%25D8%25B1%25D8%25AC%25202%2520-%2520%25D8%25A7%25D9%2584%25D8%25AF%25D9%2588%25D8%25B1%2520%25D8%25A7%25D9%2584%25D8%25AE%25D8%25A7%25D9%2585%25D8%25B3%2520-%2520%25D8%25B4%25D9%2582%25D8%25A9%25208%252C%2520Damietta%252C%2520Egypt%26FORM%3DFBKPL1%26mkt%3Den-GB%26fbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExTHJPbXU1MjJlbHhWMEc2THNydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR7Vk4jXc-1tmq5NtmXZnkanP8UM4XxGvK4VHoYZxlu5rzz85KON-dG4BiE3cw_aem_6_azjJNvW9dZSr_rIV1dXQ&h=AUAGq-9EPxt6oIe3_qk2RjpiGZOe1uOGzNpFZV75PCiL-fjWPR9F5-EVmzV7qsP0Oe9obI_xoGPmTTYdjnXKDzDym178GotZkKAxJ2bbgYXbIa1UWHSSQm8dofk7G9xvM-m_',
     },
   ];
 
@@ -156,7 +156,7 @@ const ContactUs = () => {
                   <Clock className="w-6 h-6 text-amber-400 stroke-[1.5] shrink-0" />
                   <div>
                     <p className="text-slate-400 text-sm mb-1">{t.footer?.workingHours || (isRTL ? 'ساعات العمل' : 'Working Hours')}</p>
-                    <p className="font-bold tracking-wide">{t.footer?.hours || '10:00 AM - 10:00 PM'}</p>
+                    <p className="font-bold tracking-wide">{t.footer?.hours || '01:00 PM - 01:00 AM'}</p>
                   </div>
                 </div>
                 <div className="h-px w-full bg-white/10" />
