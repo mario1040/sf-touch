@@ -21,18 +21,7 @@ interface Doctor {
 }
 
 const doctors: Doctor[] = [
-  {
-    id: '01',
-    name: 'Dr. Sally Eladawy',
-    nameAr: 'د. سالي العدوي',
-    specialty: 'Dermatology & Laser Specialist',
-    specialtyAr: 'أخصائية الأمراض الجلدية والليزر',
-    quote: 'Precision in every pulse of light, revealing your flawless skin.',
-    quoteAr: 'دقة متناهية في كل إجراء، لنكشف عن صفاء بشرتك الحقيقي.',
-    image: '/images/OES02416.jpg', // تأكد من المسار
-    icon: Sparkles,
-    accent: 'from-amber-500/10 to-orange-500/0',
-  },
+  
   {
     id: '02',
     name: 'Dr. Freehan Zakria',
@@ -44,6 +33,18 @@ const doctors: Doctor[] = [
     image: '/images/OES02435.jpg', // تأكد من المسار
     icon: Stethoscope,
     accent: 'from-rose-500/10 to-pink-500/0',
+  },
+  {
+    id: '01',
+    name: 'Dr. Sally Eladawy',
+    nameAr: 'د. سالي العدوي',
+    specialty: 'Dermatology & Laser Specialist',
+    specialtyAr: 'أخصائية الأمراض الجلدية والليزر',
+    quote: 'Precision in every pulse of light, revealing your flawless skin.',
+    quoteAr: 'دقة متناهية في كل إجراء، لنكشف عن صفاء بشرتك الحقيقي.',
+    image: '/images/OES02416.jpg', // تأكد من المسار
+    icon: Sparkles,
+    accent: 'from-amber-500/10 to-orange-500/0',
   },
   {
     id: '03',
