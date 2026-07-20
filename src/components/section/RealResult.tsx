@@ -73,7 +73,7 @@ const specialties: Specialty[] = [
       {
         id: "Hair Restoration",
         labelEn: "Hair Restoration",
-        labelAr: "",
+        labelAr: "زراعه الشعر",
         link: "/services/hair-restoration",
         case: { before: "/images/image (37).png", after: "/images/image (38).png" },
       },
