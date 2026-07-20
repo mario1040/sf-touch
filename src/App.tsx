@@ -17,6 +17,7 @@ import DermatologyLaser from "./pages/DermatologyLaser";
 import NutritionContouring from "./pages/NutritionContouring";
 import HairRestoration from "./pages/HairRestoration";
 import NotFound from "./pages/NotFound";
+import WhatsAppButton from "@/components/ui/WhatsAppButton";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +56,8 @@ const App = () => (
               <Route path="/contact-us" element={<ContactUs />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            {/* 🚀 الـ WhatsApp Button ثابت هنا ليرافق المستخدم في كل الصفحات */}
+                    <WhatsAppButton />
           </Layout>
         </BrowserRouter>
       </TooltipProvider>
