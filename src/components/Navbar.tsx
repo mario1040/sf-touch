@@ -117,11 +117,11 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 sm:px-6 h-full flex justify-between items-center">
           <div className="flex items-center gap-6">
-            <a href="tel:0572260062" className="flex items-center gap-2 hover:text-yellow-500 transition-colors group">
+            <a href="tel:01503656589" className="flex items-center gap-2 hover:text-yellow-500 transition-colors group">
               <div className="p-1 rounded-full bg-white/5 group-hover:bg-yellow-500/10 transition-colors">
                 <Phone className="w-3 h-3 text-yellow-500" />
               </div>
-              <span>0572260062</span>
+              <span>01503656589</span>
             </a>
             <span className="hidden md:flex items-center gap-2">
               <MapPin className="w-3 h-3 text-slate-500" />

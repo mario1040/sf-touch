@@ -18,6 +18,7 @@ import NutritionContouring from "./pages/NutritionContouring";
 import HairRestoration from "./pages/HairRestoration";
 import NotFound from "./pages/NotFound";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
+import Preloader from "@/components/effects/Preloader";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +45,7 @@ const App = () => (
           <ScrollToTop />
           
           <Layout>
+            <Preloader />
             <Routes>
               <Route path="/" element={<Index />} />
               <Route path="/about-us" element={<AboutUs />} />

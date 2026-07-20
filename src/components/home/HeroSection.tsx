@@ -138,7 +138,7 @@ const HeroSection = () => {
             </motion.p>
 
             <motion.div variants={fadeUp} className="mt-8 flex flex-wrap items-center gap-4">
-              <a href="tel:0572260062" className="group">
+              <a href="tel:01503656589" className="group">
                 <button className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-7 py-4 text-sm font-bold text-white shadow-[0_18px_50px_rgba(15,23,42,0.18)] transition-transform duration-300 hover:-translate-y-0.5 active:scale-[0.98]">
                   <PhoneCall className="h-4 w-4" />
                   <span>{t.hero.cta || (isRTL ? 'احجزي موعدك' : 'Book Appointment')}</span>

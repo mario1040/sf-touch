@@ -117,7 +117,7 @@ const CTASection = () => {
            {/* توهج خلفي للزر */}
            <div className="absolute inset-0 bg-gradient-to-r from-yellow-500 to-amber-600 rounded-full blur-xl opacity-30 group-hover:opacity-60 group-hover:blur-2xl transition-all duration-500" />
            
-           <a href="tel:0572260062" className="relative flex items-center justify-center gap-4 px-10 py-5 bg-gradient-to-b from-slate-900 to-black border border-yellow-500/50 rounded-full overflow-hidden group-hover:scale-105 transition-transform duration-300">
+           <a href="tel:01503656589" className="relative flex items-center justify-center gap-4 px-10 py-5 bg-gradient-to-b from-slate-900 to-black border border-yellow-500/50 rounded-full overflow-hidden group-hover:scale-105 transition-transform duration-300">
               
               {/* لمعة زجاجية تتحرك فوق الزر */}
               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-[-20deg] translate-x-[-150%] group-hover:translate-x-[150%] transition-transform duration-700" />
