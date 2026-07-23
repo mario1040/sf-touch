@@ -55,7 +55,7 @@ const ServicesSection = () => {
       title: t.services?.nutrition?.title || (isRTL ? 'التغذية ونحت القوام' : 'Nutrition & Contouring'),
       description: t.services?.nutrition?.description || (isRTL ? 'خطط طبية متكاملة للوصول إلى الوزن المثالي والقوام المتناسق.' : 'Comprehensive medical plans for your ideal weight and shape.'),
       icon: Activity,
-      image: '/images/images (2).jpg',
+      image: '/images/images (5).jpg',
       href: '/services/nutrition-contouring',
       gridClass: 'md:col-span-1 min-h-[300px]',
       accent: 'from-emerald-500/40 via-teal-500/20 to-transparent',
@@ -65,7 +65,7 @@ const ServicesSection = () => {
       title: t.services?.hair?.title || (isRTL ? 'زراعة وعلاج الشعر' : 'Hair Restoration'),
       description: t.services?.hair?.description || (isRTL ? 'أحدث التقنيات لاستعادة كثافة الشعر وحيويته بأسلوب طبيعي.' : 'Latest technologies to restore hair density and natural vitality.'),
       icon: Scissors,
-      image: '/images/2641925.webp',
+      image: '/images/6485892b-1ae1-45e5-b3dc-6aa57ed65001-1.png',
       href: '/services/hair-restoration',
       gridClass: 'md:col-span-1 min-h-[300px]',
       accent: 'from-blue-500/40 via-indigo-500/20 to-transparent',
@@ -94,7 +94,7 @@ const ServicesSection = () => {
 
   const clinicHighlights = [
     { icon: Stethoscope, label: isRTL ? 'إشراف طبي دقيق' : 'Expert Medical Care' },
-    { icon: ShieldCheck, label: isRTL ? 'أجهزة معتمدة عالمياً' : 'FDA Approved Tech' },
+    //{ icon: ShieldCheck, label: isRTL ? 'أجهزة معتمدة عالمياً' : 'FDA Approved Tech' },
     { icon: Award, label: isRTL ? 'نتائج طبيعية ومضمونة' : 'Natural & Proven Results' },
   ];
 

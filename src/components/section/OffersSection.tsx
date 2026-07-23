@@ -207,7 +207,7 @@ const OffersSection = () => {
               className="mb-4 block text-2xl md:text-3xl font-serif text-[#D4AF37]"
               style={{ fontFamily: "'Dancing Script', cursive" }}
             >
-              {language === "en" ? "Exclusive Rituals" : "لمسات حصرية"}
+              {language === "en" ? "Exclusive Offers" : "عروض حصرية"}
             </span>
 
             <h2 className="text-5xl md:text-7xl font-serif font-black tracking-tighter leading-[0.88] text-[#0B1120]">

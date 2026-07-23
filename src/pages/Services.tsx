@@ -33,7 +33,7 @@ const Services = () => {
       title: t.services?.nutrition?.title || (isRTL ? 'التغذية ونحت القوام' : 'Nutrition & Contouring'),
       description: t.services?.nutrition?.description || (isRTL ? 'برامج طبية مخصصة للوصول للوزن المثالي، مقترنة بأحدث أجهزة تفتيت الدهون ونحت الجسم غير الجراحي.' : 'Customized medical programs for ideal weight, paired with non-surgical fat freezing and contouring.'),
       icon: Apple,
-      image: '/images/images (2).jpg',
+      image: '/images/images (5).jpg',
       href: '/services/nutrition-contouring',
       accent: 'text-emerald-500',
       bgAccent: 'bg-emerald-500'
@@ -43,7 +43,7 @@ const Services = () => {
       title: t.services?.hair?.title || (isRTL ? 'علاج وتجميل الشعر' : 'Hair Restoration'),
       description: t.services?.hair?.description || (isRTL ? 'علاجات مبتكرة لتساقط الشعر، حقن البلازما، وتقنيات حديثة لاستعادة كثافة وحيوية الشعر بشكل طبيعي.' : 'Innovative treatments for hair loss, PRP injections, and modern tech to restore density and vitality naturally.'),
       icon: Scissors,
-      image: '/images/2641925.webp',
+      image: '/images/6485892b-1ae1-45e5-b3dc-6aa57ed65001-1.png',
       href: '/services/hair-restoration',
       accent: 'text-rose-500',
       bgAccent: 'bg-rose-500'

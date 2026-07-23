@@ -13,16 +13,10 @@ import {
   ArrowRight,
   Sparkles,
   ChevronRight,
+  ExternalLink,
 } from "lucide-react";
 import { SiSnapchat } from "react-icons/si";
 import { useLanguage } from "@/context/LanguageContext";
-
-interface ContactItemProps {
-  icon: React.ElementType;
-  title: string;
-  desc: string;
-  href?: string;
-}
 
 interface PhoneItem {
   label: string;
@@ -34,6 +28,24 @@ const Footer = () => {
   const { t, isRTL } = useLanguage();
 
   const logoSrc = "/images/logo.png";
+
+  // بيانات الفروع مع الإحداثيات لكل فرع
+  const branches = [
+    {
+      id: "damietta",
+      title: t.footer?.damietta || (isRTL ? "فرع دمياط القديمة" : "Old Damietta Branch"),
+      desc: isRTL ? "الصفوة مول - برج 2 - الدور 5 - شقة 8" : "Safwa Mall - Tower 2 - 5th Floor - Apt 8",
+      mapLink: "https://www.google.com/maps?q=31.422801,31.807625&z=17&hl=en",
+      embedLink: "https://maps.google.com/maps?q=31.422801,31.807625&z=17&output=embed",
+    },
+    {
+      id: "new-damietta",
+      title: t.footer?.newDamietta || (isRTL ? "فرع دمياط الجديدة" : "New Damietta Branch"),
+      desc: isRTL ? "المنطقة المركزية - الدور الأول" : "Central Zone - 1st Floor",
+      mapLink: "https://www.google.com/maps?q=31.43739128112793,31.680818557739258&z=17&hl=en",
+      embedLink: "https://maps.google.com/maps?q=31.43739128112793,31.680818557739258&z=17&output=embed",
+    },
+  ];
 
   const quickLinks = [
     { href: "/", label: t.nav.home },
@@ -204,7 +216,7 @@ const Footer = () => {
             </div>
           </motion.div>
 
-          {/* Contact + Phones */}
+          {/* Contact + Maps */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -213,24 +225,61 @@ const Footer = () => {
             className="lg:col-span-5"
           >
             <div className="rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur-xl">
-              <h4 className="relative mb-6 inline-block text-lg font-bold text-white">
-                {t.footer?.branches || (isRTL ? "الفروع والتواصل" : "Branches & Contact")}
-                <span className="absolute -bottom-2 left-0 h-0.5 w-1/2 rounded-full bg-yellow-500" />
-              </h4>
-
-              <div className="grid gap-4 md:grid-cols-2">
-                <ContactItem
-                  icon={MapPin}
-                  title={t.footer?.damietta || (isRTL ? "فرع دمياط" : "Damietta Branch")}
-                  desc={isRTL ? "الصفوة مول - الدور الثاني" : "Safwa Mall - 2nd Floor"}
-                />
-                <ContactItem
-                  icon={MapPin}
-                  title={t.footer?.newDamietta || (isRTL ? "فرع دمياط الجديدة" : "New Damietta Branch")}
-                  desc={isRTL ? "المنطقة المركزية - الدور الأول" : "Central Zone - 1st Floor"}
-                />
+              <div className="mb-6 flex items-center justify-between">
+                <h4 className="relative inline-block text-lg font-bold text-white">
+                  {t.footer?.branches || (isRTL ? "فروعنا على الخريطة" : "Our Locations")}
+                  <span className="absolute -bottom-2 left-0 h-0.5 w-1/2 rounded-full bg-yellow-500" />
+                </h4>
               </div>
 
+              {/* الخريطتين معاً - قابلة للضغط مباشرة */}
+              <div className="grid gap-4 md:grid-cols-2">
+                {branches.map((branch) => (
+                  <a
+                    key={branch.id}
+                    href={branch.mapLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative block h-40 w-full overflow-hidden rounded-2xl border border-white/10 bg-slate-900 transition-all duration-300 hover:-translate-y-1 hover:border-yellow-500/50 hover:shadow-lg hover:shadow-yellow-500/10"
+                  >
+                    {/* Overlay لدمج الخريطة مع الستايل ووضع البيانات */}
+                    <div className="pointer-events-none absolute inset-0 z-10 bg-slate-900/30 mix-blend-multiply transition-opacity duration-500 group-hover:opacity-10" />
+
+                    {/* بيانات العنوان بتظهر فوق الخريطة بشكل أنيق */}
+                    <div className="absolute top-0 left-0 right-0 z-20 bg-gradient-to-b from-slate-950/90 via-slate-950/70 to-transparent p-4 pb-8">
+                      <div className="mb-1 flex items-center gap-2">
+                        <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-yellow-500/20 text-yellow-500">
+                          <MapPin className="h-3 w-3" />
+                        </div>
+                        <p className="text-sm font-bold text-white transition-colors group-hover:text-yellow-400">
+                          {branch.title}
+                        </p>
+                      </div>
+                      <p className="text-xs text-slate-300 drop-shadow-md">
+                        {branch.desc}
+                      </p>
+                    </div>
+
+                    {/* الخريطة (عطلنا التفاعل معها لتكون مجرد خلفية واللينك هو اللي يشتغل) */}
+                    <iframe
+                      src={branch.embedLink}
+                      title={branch.title}
+                      className="pointer-events-none absolute inset-0 h-full w-full border-0 opacity-70 grayscale filter transition-all duration-500 group-hover:opacity-100 group-hover:grayscale-0"
+                      allowFullScreen
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                    />
+
+                    {/* زر يظهر عند تمرير الماوس */}
+                    <div className={`absolute bottom-3 z-30 flex translate-y-4 items-center gap-2 rounded-full bg-yellow-500 px-4 py-2 text-xs font-bold text-slate-900 opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100 ${isRTL ? "left-3" : "right-3"}`}>
+                      {isRTL ? "افتح الخريطة" : "Open Map"}
+                      <ExternalLink className="h-3 w-3" />
+                    </div>
+                  </a>
+                ))}
+              </div>
+
+              {/* الأرقام والاتصال */}
               <div className="mt-6 rounded-3xl border border-white/10 bg-slate-950/50 p-5">
                 <div className="mb-4 flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-yellow-500/10 text-yellow-500">
@@ -323,32 +372,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
-
-const ContactItem = ({ icon: Icon, title, desc, href }: ContactItemProps) => {
-  const content = (
-    <div className="group flex gap-4 rounded-2xl border border-white/10 bg-slate-950/40 p-4 transition-all duration-300 hover:border-yellow-500/20 hover:bg-yellow-500/10">
-      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-white/5 text-slate-400 transition-colors group-hover:bg-yellow-500/10 group-hover:text-yellow-500">
-        <Icon className="h-5 w-5" />
-      </div>
-      <div>
-        <p className="mb-1 text-sm font-bold text-white transition-colors group-hover:text-yellow-300">
-          {title}
-        </p>
-        <p className="text-xs leading-6 text-slate-400">{desc}</p>
-      </div>
-    </div>
-  );
-
-  if (href) {
-    return (
-      <a href={href} className="block">
-        {content}
-      </a>
-    );
-  }
-
-  return content;
 };
 
 export default Footer;
